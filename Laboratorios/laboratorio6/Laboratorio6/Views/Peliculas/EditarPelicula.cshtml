@@ -1,0 +1,32 @@
+﻿@model Laboratorio6.Models.PeliculaModelo
+
+@{
+    ViewBag.Title = "Editar Pelicula";
+}
+
+<html>
+<head>
+</head>
+<body>
+
+    @using (Html.BeginForm("EditarPelicula", "peliculas", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <h1>Se va a editar una película </h1>
+        @Html.HiddenFor(model=>model.ID);
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Nombre)
+                @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control"})
+                @Html.ValidationMessageFor(model => model.Nombre, "" , new { @class = "text-danger"} )
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Año)
+                @Html.TextBoxFor(model => model.Año, new { @class = "form-control"})
+                @Html.ValidationMessageFor(model => model.Año, "" , new { @class = "text-danger"} )
+            </div>
+            <input type="submit" class="btn-success" value="Editar" />
+        </div>
+    }
+</body>
+</html>

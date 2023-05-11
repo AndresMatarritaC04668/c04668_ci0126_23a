@@ -1,0 +1,49 @@
+﻿@model List<Laboratorio6.Models.PeliculaModelo>;
+   
+@{
+    ViewData["Title"] = "Peliculas";
+}
+
+<h1>@ViewBag.MainTitle</h1>
+<div>
+    <a href="@Url.Action("CrearPelicula","Peliculas")"
+      class="btn btn-success">CrearPelicula</a>
+      <table class="table">
+          <thread>
+              <tr>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                   <th>Año</th>
+                  <th>Editar</th>
+                   <th>Borrar</th>
+               
+              </tr>
+          </thread>
+        <tbody>
+            @foreach(var item in Model)
+            {
+                <tr>
+                    <td>@item.ID</td>
+                    <td>@item.Nombre</td>
+                    <td>@item.Año</td>
+                    <td>
+                        @Html.ActionLink("Editar","EditarPelicula",
+                        new {identificador = item.ID},
+                        new {@class = "btn btn alert-info",
+                        @onclick = "return confirm('Desea editar esta pelicula?')"})
+                    </td>
+                     <td>
+                        @Html.ActionLink("Borrar","BorrarPelicula",
+                        new {identificador = item.ID},
+                        new {@class = "btn btn alert-danger",
+                        @onclick = "return confirm('Desea borrar esta pelicula?')"})
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+
+</div>
+
