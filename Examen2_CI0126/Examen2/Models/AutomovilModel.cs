@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Examen2.Models
 {
-    public class Automovil
+    public class AutomovilModel
     {
         [Required(ErrorMessage = "Debe ingresar una marca para el automovil")]
         [DisplayName("Marca del automovil")]
@@ -19,13 +19,13 @@ namespace Examen2.Models
 
         [Required(ErrorMessage = "Debe ingresar la cantidad de puertas del automovil")]
         [DisplayName("Cantidad de puertas")]
-        [Range(1, 5, ErrorMessage = "Debe ingresar un número válido (entre 1 y 10)")]
-        public int NumeroPuertas { get; set; }
+        [Range(1, 5, ErrorMessage = "Debe ingresar un número válido (entre 1 y 5)")]
+        public int? NumeroPuertas { get; set; }
 
 
         [Required(ErrorMessage = "Debe indicar si es o no doble tracción")]
         [DisplayName("¿Es doble tracción?")]
-        [Range(typeof(bool), "false", "true", ErrorMessage = "El valor debe ser 'true' o 'false'")]
+        [RegularExpression("^(Sí|No)$", ErrorMessage = "El valor debe ser 'Sí' o 'No'")]
         public bool DobleTraccion { get; set; }
 
 

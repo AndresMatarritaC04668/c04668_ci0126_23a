@@ -15,12 +15,12 @@
     <header id="header" class="fixed-top d-flex align-items-centert">
         <div class="container d-flex justify-content-between align-items-center">
             <div class="logo">
-                <h1 class="text-light"><a href="~/Home/Inicio"><span>CONCESIONARIO</span></a></h1>
+                <h1 class="text-light"><a href="~/Home/Index"><span>CONCESIONARIO</span></a></h1>
             </div>
             <nav id="navbar" class="navbar">
                 <ul>
                     <li>@Html.ActionLink("Administrar Automóviles", "", "Home")</li>
-                    <li>@Html.ActionLink("Agregar Automóvil", "", "Home")</li>
+                    <li>@Html.ActionLink("Agregar Automóvil", "AgregarAutomovil", "Automovil")</li>
                     
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>

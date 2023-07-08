@@ -1,0 +1,31 @@
+﻿/* AgregarAutomovil.css */
+
+/* Estilo para los divs */
+.form-group {
+    margin-bottom: 10px;
+}
+
+/* Estilo para las etiquetas de los campos */
+label {
+    display: inline-block;
+    width: 200px;
+    font: regular;
+    color: black;
+    margin-top: 10px;
+}
+
+/* Estilo para los campos de entrada */
+.form-control {
+    width: 250px;
+}
+
+/* Estilo para los mensajes de validación */
+.text-danger {
+    color: red;
+}
+
+/* Estilo para el boton de enviar */
+.btn-enviar {
+    margin-left: 60px;
+    margin-top: 20px;
+}
