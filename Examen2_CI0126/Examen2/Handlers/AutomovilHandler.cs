@@ -26,8 +26,8 @@ namespace Examen2.Handlers
                     comandoParaConsulta.Parameters.AddWithValue("@marca", automovil.Marca);
                     comandoParaConsulta.Parameters.AddWithValue("@modelo", automovil.Modelo);
                     comandoParaConsulta.Parameters.AddWithValue("@color", automovil.Color);
-                    comandoParaConsulta.Parameters.AddWithValue("@numeroPuertas",2);
-                    comandoParaConsulta.Parameters.AddWithValue("@dobleTraccion", 1);
+                    comandoParaConsulta.Parameters.AddWithValue("@numeroPuertas",automovil.NumeroPuertas);
+                    comandoParaConsulta.Parameters.AddWithValue("@dobleTraccion", automovil.DobleTraccion);
                     conexion.Open();
                     exito = comandoParaConsulta.ExecuteNonQuery() >= 1;
                     conexion.Close();
@@ -39,10 +39,29 @@ namespace Examen2.Handlers
             
             return exito;
         }
-
-        public bool AutomovilNoNulo(AutomovilModel automovil)
+        public List<AutomovilModel> ObtenerAutomoviles()
         {
-            return automovil != null;
+            List<AutomovilModel> automoviles= new List<AutomovilModel>();
+            string consulta = "SELECT * FROM concesionario";
+            DataTable tablaResultado = CrearTablaConsulta(consulta);
+            foreach (DataRow columna in tablaResultado.Rows)
+            {
+                automoviles.Add(
+                    new AutomovilModel
+                    {
+                        Marca = Convert.ToString(columna["marca"]),
+                        Modelo = Convert.ToString(columna["modelo"]),
+                        Color = Convert.ToString(columna["color"]),
+                        NumeroPuertas = Convert.ToInt32(columna["numeroPuertas"]),
+                        DobleTraccion = Convert.ToBoolean(columna["dobleTraccion"]),
+
+                    });
+            }
+            return automoviles;
         }
+
+
+
+
     }
 }

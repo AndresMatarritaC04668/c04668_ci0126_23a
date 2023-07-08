@@ -7,6 +7,16 @@ namespace Examen2.Controllers
     public class AutomovilController : Controller
     {
         [HttpGet]
+
+        public IActionResult AdministrarAutomoviles()
+        {
+           AutomovilHandler automovilHandler = new AutomovilHandler();
+            var automoviles = automovilHandler.ObtenerAutomoviles();
+            ViewBag.MainTitle = "Lista de automóviles";
+            return View(automoviles);
+        }
+
+        [HttpGet]
         public IActionResult AgregarAutomovil()
         {
             return View();
