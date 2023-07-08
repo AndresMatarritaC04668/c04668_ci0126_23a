@@ -1,0 +1,54 @@
+﻿@model List<Examen2.Models.AutomovilModel>;
+@{
+    ViewData["Title"] = "Automóvil";
+}
+
+<h1>@ViewBag.MainTitle</h1>
+<div>
+    <table class="table">
+        <thread>
+            <tr>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Color</th>
+                <th>Cantidad de Puertas</th>
+                <th>Doble Tracción</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+
+            </tr>
+        </thread>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Marca</td>
+                    <td>@item.Modelo</td>
+                    <td>@item.Color</td>
+                    <td>@item.NumeroPuertas</td>
+
+                    @if (@item.DobleTraccion == true){
+                        <td>Sí</td>
+                    } else {
+                     <td>No</td>
+                    }
+                    <td>
+                        @Html.ActionLink("Editar","EditarAutomovil",
+                    new {},
+                    new {@class = "btn btn alert-info",
+                    @onclick = "return confirm('Desea editar este automóvil?')"})
+                    </td>
+                    <td>
+                        @Html.ActionLink("Borrar","BorrarAutomovil",
+                    new {},
+                    new {@class = "btn btn alert-danger",
+                    @onclick = "return confirm('Desea borrar este automóvil?')"})
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+
+</div>

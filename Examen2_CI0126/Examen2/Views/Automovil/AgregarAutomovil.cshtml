@@ -1,8 +1,9 @@
 ﻿@model Examen2.Models.AutomovilModel
 
 @{
-    ViewBag.Title = "Agregar Automóvil";
+    ViewData["Title"] = "Agregar Automóvil";
 }
+
 
 <html>
 <head>
@@ -24,7 +25,7 @@
     @using (Html.BeginForm("AgregarAutomovil", "Automovil", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
-         
+        
         <h2>Formulario para agregar un automóvil </h2>
         <hr>   
         <div class="form-horizontal">
