@@ -6,15 +6,15 @@ namespace Examen2.Models
     public class AutomovilModel
     {
         [Required(ErrorMessage = "Debe ingresar una marca para el automovil")]
-        [DisplayName("Marca del automovil")]
+        [DisplayName("Marca")]
         public string? Marca { get; set; }
 
         [Required(ErrorMessage = "Debe ingresar un modelo para el automovil")]
-        [DisplayName("Modelo del automovil")]
+        [DisplayName("Modelo")]
         public string? Modelo { get; set; }
 
         [Required(ErrorMessage = "Debe ingresar un color para el automovil")]
-        [DisplayName("Color del automovil")]
+        [DisplayName("Color")]
         public string? Color { get; set; }
 
         [Required(ErrorMessage = "Debe ingresar la cantidad de puertas del automovil")]
@@ -25,8 +25,7 @@ namespace Examen2.Models
 
         [Required(ErrorMessage = "Debe indicar si es o no doble tracción")]
         [DisplayName("¿Es doble tracción?")]
-        [RegularExpression("^(Sí|No)$", ErrorMessage = "El valor debe ser 'Sí' o 'No'")]
-        public bool DobleTraccion { get; set; }
+        public bool? DobleTraccion { get; set; }
 
 
     }
