@@ -1,5 +1,10 @@
 use C04668 
 
+
+/*
+  Procedimiento para insertar una tupla en
+  la tabla consecionario
+*/
 go
 CREATE PROCEDURE InsertarConcesionario
     @marca VARCHAR(50),
@@ -15,4 +20,4 @@ END;
 go
 
 
-EXEC InsertarConcesionario 'Toyota', 'Corolla', 'Rojo', 4, 1;
+
