@@ -12,7 +12,7 @@ namespace Examen2.Handlers
         {
             var builder = WebApplication.CreateBuilder();
             rutaConexion =
-            builder.Configuration.GetConnectionString("ContextoJunquillal");
+            builder.Configuration.GetConnectionString("ContextoConcesionario");
             conexion = new SqlConnection(rutaConexion);
         }
 
@@ -35,7 +35,7 @@ namespace Examen2.Handlers
         {
             var builder = WebApplication.CreateBuilder();
             rutaConexion =
-            builder.Configuration.GetConnectionString("ContextoJunquillal");
+            builder.Configuration.GetConnectionString("ContextoConcesionario");
             conexion = new SqlConnection(rutaConexion);
         }
     }
