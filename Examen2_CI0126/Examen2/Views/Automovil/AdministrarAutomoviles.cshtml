@@ -1,10 +1,14 @@
 ﻿@model List<Examen2.Models.AutomovilModel>;
+
 @{
-    ViewData["Title"] = "Automóvil";
+    ViewBag.Title = "Administrar Automóviles";
 }
 
-<h1>@ViewBag.MainTitle</h1>
-<div>
+<html>
+    <head>
+    <title>Administrar Automóviles</title>
+    </head>
+    <body>
     <table class="table">
         <thread>
             <tr>
@@ -34,9 +38,9 @@
                     }
                     <td>
                         @Html.ActionLink("Editar","EditarAutomovil",
-                    new {},
+                    new { marca = item.Marca , modelo = item.Modelo },
                     new {@class = "btn btn alert-info",
-                    @onclick = "return confirm('Desea editar este automóvil?')"})
+                    @onclick = "return confirm('¿Desea editar este automóvil?')"})
                     </td>
                     <td>
                         @Html.ActionLink("Eliminar","EliminarAutomovil",
@@ -49,6 +53,5 @@
         </tbody>
 
     </table>
-
-
-</div>
+</body>
+</html>

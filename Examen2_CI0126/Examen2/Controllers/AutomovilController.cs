@@ -12,7 +12,6 @@ namespace Examen2.Controllers
 
         public IActionResult AdministrarAutomoviles()
         {
-           AutomovilHandler automovilHandler = new AutomovilHandler();
             var automoviles = automovilHandler.ObtenerAutomoviles();
             ViewBag.MainTitle = "Lista de automóviles";
             return View(automoviles);
@@ -53,6 +52,48 @@ namespace Examen2.Controllers
                 return View();
             } 
         }
+
+        [HttpGet]
+        public ActionResult EditarAutomovil(string? marca, string? modelo)
+        {
+            ActionResult vista;
+            try
+            {
+                var automovil = automovilHandler.ObtenerAutomoviles().Find(model => model.Marca == marca
+                                                                           && model.Modelo == modelo);
+                if ( automovil == null )
+                {
+                    vista = RedirectToAction("AdministrarAutomoviles");
+                }
+                else
+                {
+                    vista = View(automovil);
+                }
+            }
+            catch
+            {
+                vista = RedirectToAction("AdministrarAutomoviles");
+            }
+
+            return vista;
+        }
+
+        [HttpPost]
+        public ActionResult EditarAutomovil( AutomovilModel automovil )
+        {
+            try
+            {
+                automovilHandler.EditarAutomovil(automovil);
+                return RedirectToAction("AdministrarAutomoviles" , "Automovil");
+
+            }
+            catch
+            {
+                ViewBag.Mensaje = "La modificacion del automóvil tuvo un error";
+                return View();
+            }
+        }
+
 
         [HttpGet]
         public ActionResult EliminarAutomovil(string? marca , string? modelo)
