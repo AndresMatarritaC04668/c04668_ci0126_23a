@@ -78,22 +78,20 @@ namespace Examen2.Controllers
             return vista;
         }
 
+
         [HttpPost]
-        public ActionResult EditarAutomovil( AutomovilModel automovil )
+        public ActionResult EditarAutomovil(AutomovilModel automovil)
         {
             try
             {
                 automovilHandler.EditarAutomovil(automovil);
-                return RedirectToAction("AdministrarAutomoviles" , "Automovil");
-
+                return RedirectToAction("AdministrarAutomoviles", "Automovil");
             }
-            catch
+            catch (Exception ex)
             {
-                ViewBag.Mensaje = "La modificacion del automóvil tuvo un error";
-                return View();
+                throw new Exception("La modificación del automóvil tuvo un error: " + ex.Message);
             }
         }
-
 
         [HttpGet]
         public ActionResult EliminarAutomovil(string? marca , string? modelo)
