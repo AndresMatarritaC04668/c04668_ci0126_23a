@@ -18,10 +18,16 @@ a {
     text-decoration: none;
 }
 
-    a:hover {
-        color: #45beff;
-        text-decoration: none;
-    }
+a:hover {
+    color: #45beff;
+    text-decoration: none;
+}
+#errorMessage {
+    color: red;
+    display: none;
+    margin-bottom:20px;
+}
+
 
 h1, h2, h3, h4, h5, h6, .font-primary {
     font-family: "Roboto", sans-serif;

@@ -122,5 +122,11 @@ namespace Examen2.Controllers
             return vista;
         }
 
+        public ActionResult AdministrarAutomovilesPorMarca(string? marca)
+        {
+            List<AutomovilModel> automoviles = automovilHandler.ObtenerAutomovilesPorMarca(marca);
+            return View("AdministrarAutomoviles", automoviles);
+        }
+
     }
 }

@@ -48,12 +48,49 @@ namespace Examen2.Handlers
             try
             {
                 tablaResultado = CrearTablaConsulta(consulta);
+                automoviles = DevolverAutomovilesConsulta(tablaResultado);
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error al crear la tabla de consulta: " + ex.Message);
                 return automoviles; 
             }
+
+
+            return automoviles;
+
+
+        }
+
+        public List<AutomovilModel> ObtenerAutomovilesPorMarca(string marca)
+        {
+            List<AutomovilModel> automoviles = new List<AutomovilModel>();
+
+            string consulta = "SELECT * FROM concesionario WHERE marca = @marca";
+
+            try
+            {
+                 using (SqlCommand comandoConsulta = new SqlCommand(consulta, conexion))
+                 {
+                     comandoConsulta.Parameters.AddWithValue("@marca", marca);
+                     conexion.Open();
+                     DataTable tablaResultado = new DataTable();
+                     tablaResultado.Load(comandoConsulta.ExecuteReader());
+                     automoviles = DevolverAutomovilesConsulta(tablaResultado);
+                 }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al ejecutar la consulta: " + ex.Message);
+            }
+
+            return automoviles;
+        }
+
+
+        private List<AutomovilModel> DevolverAutomovilesConsulta(DataTable tablaResultado)
+        {
+            List<AutomovilModel> automoviles = new List<AutomovilModel>();
 
             foreach (DataRow columna in tablaResultado.Rows)
             {
@@ -75,8 +112,8 @@ namespace Examen2.Handlers
             }
 
             return automoviles;
-
         }
+
 
         public void EliminarAutomovil(AutomovilModel? automovil)
         {

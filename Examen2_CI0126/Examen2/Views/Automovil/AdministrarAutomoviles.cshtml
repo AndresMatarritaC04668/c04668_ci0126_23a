@@ -7,8 +7,14 @@
 <html>
     <head>
     <title>Administrar Automóviles</title>
+    <script defer src="~/js/AdministrarAutomoviles.js"></script>
     </head>
     <body>
+    <button class="btn btn-enviar" onclick="BuscarAutomovilesPorMarca()">Buscar por Marca</button>
+     <input type="text" id="marca-input" placeholder="Marca" maxlength="30">
+     <p id="errorMessage"></p>
+     <br>
+     <br>
     <table class="table">
         <thread>
             <tr>
