@@ -6,6 +6,8 @@ namespace Examen2.Controllers
 {
     public class AutomovilController : Controller
     {
+       private AutomovilHandler automovilHandler = new AutomovilHandler();
+
         [HttpGet]
 
         public IActionResult AdministrarAutomoviles()
@@ -30,7 +32,6 @@ namespace Examen2.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                   AutomovilHandler automovilHandler = new AutomovilHandler();
                    ViewBag.ExitoAlCrear = automovilHandler.AgregarAutomovil(automovil);
 
                     if (ViewBag.ExitoAlCrear)
@@ -51,6 +52,33 @@ namespace Examen2.Controllers
                 ViewBag.Message = "Algo salió mal y no fue posible agregar el  automóvil ";
                 return View();
             } 
+        }
+
+        [HttpGet]
+        public ActionResult EliminarAutomovil(string? marca , string? modelo)
+        {
+            ActionResult vista;
+
+            try
+            {       
+                var automovil = automovilHandler.ObtenerAutomoviles().Find(model => model.Marca == marca
+                                                                           && model.Modelo == modelo);
+                if (modelo == null)
+                {
+                    vista = RedirectToAction("AdministrarAutomoviles");
+                }
+                else
+                {
+                    automovilHandler.EliminarAutomovil(automovil);
+                    vista = RedirectToAction("AdministrarAutomoviles");
+                }
+            }
+            catch
+            {
+                vista = RedirectToAction("AdministrarAutomoviles");
+            }
+
+            return vista;
         }
 
     }

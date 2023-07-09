@@ -39,10 +39,10 @@
                     @onclick = "return confirm('Desea editar este automóvil?')"})
                     </td>
                     <td>
-                        @Html.ActionLink("Borrar","BorrarAutomovil",
-                    new {},
+                        @Html.ActionLink("Eliminar","EliminarAutomovil",
+                    new { marca = item.Marca , modelo = item.Modelo },
                     new {@class = "btn btn alert-danger",
-                    @onclick = "return confirm('Desea borrar este automóvil?')"})
+                    @onclick = "return confirm('¿Desea borrar este automóvil?')"})
                     </td>
                 </tr>
             }

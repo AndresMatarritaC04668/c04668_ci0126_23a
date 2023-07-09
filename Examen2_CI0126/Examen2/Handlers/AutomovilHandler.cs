@@ -41,23 +41,67 @@ namespace Examen2.Handlers
         }
         public List<AutomovilModel> ObtenerAutomoviles()
         {
-            List<AutomovilModel> automoviles= new List<AutomovilModel>();
+            List<AutomovilModel> automoviles = new List<AutomovilModel>();
             string consulta = "SELECT * FROM concesionario";
-            DataTable tablaResultado = CrearTablaConsulta(consulta);
+            DataTable? tablaResultado;
+
+            try
+            {
+                tablaResultado = CrearTablaConsulta(consulta);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al crear la tabla de consulta: " + ex.Message);
+                return automoviles; 
+            }
+
             foreach (DataRow columna in tablaResultado.Rows)
             {
-                automoviles.Add(
-                    new AutomovilModel
+                try
+                {
+                    automoviles.Add(new AutomovilModel
                     {
                         Marca = Convert.ToString(columna["marca"]),
                         Modelo = Convert.ToString(columna["modelo"]),
                         Color = Convert.ToString(columna["color"]),
                         NumeroPuertas = Convert.ToInt32(columna["numeroPuertas"]),
                         DobleTraccion = Convert.ToBoolean(columna["dobleTraccion"]),
-
                     });
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error al agregar un automóvil: " + ex.Message);
+                }
             }
+
             return automoviles;
+
+        }
+
+        public void EliminarAutomovil(AutomovilModel? automovil)
+        {
+            if (AutomovilNoNulo(automovil) )
+            {
+                string consulta = "DELETE from concesionario  WHERE concesionario.marca = '" + automovil.Marca +
+                    "' AND concesionario.modelo = '" + automovil.Modelo + "';";
+                SqlCommand comandoParaConsulta = new SqlCommand(consulta, conexion);
+                try
+                {
+                    conexion.Open();
+                    comandoParaConsulta.ExecuteNonQuery();
+                    conexion.Close();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error al ejecutar la consulta: " + ex.Message);
+                }
+            }
+
+        }
+
+        public bool AutomovilNoNulo(AutomovilModel? automovil)
+        {
+            return automovil != null;
         }
 
 
