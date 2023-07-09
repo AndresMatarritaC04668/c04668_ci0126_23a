@@ -36,6 +36,9 @@ namespace Examen2_Unit_Test.Handlers
 
             // Assert
             Assert.IsTrue(resultado);
+
+            // Clean to repeat the test
+            automovilHandler.EliminarAutomovil(automovil);
         }
 
         [TestMethod]
