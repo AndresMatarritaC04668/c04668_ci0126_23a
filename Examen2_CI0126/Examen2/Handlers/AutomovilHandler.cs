@@ -80,7 +80,7 @@ namespace Examen2.Handlers
 
         public void EliminarAutomovil(AutomovilModel? automovil)
         {
-            if (AutomovilNoNulo(automovil) )
+            if (AutomovilNoNulo(automovil))
             {
                 string consulta = "DELETE from concesionario  WHERE concesionario.marca = '" + automovil.Marca +
                     "' AND concesionario.modelo = '" + automovil.Modelo + "';";
@@ -102,6 +102,37 @@ namespace Examen2.Handlers
         public bool AutomovilNoNulo(AutomovilModel? automovil)
         {
             return automovil != null;
+        }
+
+        public void  EditarAutomovil(AutomovilModel automovil)
+        {
+            if (AutomovilNoNulo(automovil))
+            {
+                var consulta = @"UPDATE [dbo].[concesionario] SET
+                           modelo = @modelo,
+                           marca = @marca,
+                           color = @color,
+                           numeroPuertas = @numeroPuertas,
+                           dobleTraccion = @dobleTraccion                           
+                           WHERE modelo = @modelo AND marca = @marca ";
+                SqlCommand comandoParaConsulta = new SqlCommand(consulta, conexion);
+                try
+                {
+                    comandoParaConsulta.Parameters.AddWithValue("@modelo", automovil.Modelo);
+                    comandoParaConsulta.Parameters.AddWithValue("@marca", automovil.Marca);
+                    comandoParaConsulta.Parameters.AddWithValue("@color", automovil.Color);
+                    comandoParaConsulta.Parameters.AddWithValue("@numeroPuertas", automovil.NumeroPuertas);
+                    comandoParaConsulta.Parameters.AddWithValue("@dobleTraccion", automovil.DobleTraccion);
+                    conexion.Open();
+                    comandoParaConsulta.ExecuteNonQuery();
+                    conexion.Close();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error al ejecutar la consulta: " + ex.Message);
+                }
+            }
+
         }
 
 
