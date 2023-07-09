@@ -10,35 +10,43 @@ namespace Examen2.Handlers
 {
     public class AutomovilHandler : HandlerAbstracto
     {
-       public AutomovilHandler() {} 
+       public AutomovilHandler() {}
 
-       public bool  AgregarAutomovil(AutomovilModel automovil)
-       {
-            bool exito = false;
+        // Método para agregar un automóvil al concesionario
+        public bool  AgregarAutomovil(AutomovilModel automovil)
+        {
+             bool consultaExitosa = false;
 
-                string consulta = @"INSERT INTO concesionario(marca, modelo, color,
-                                  numeroPuertas, dobleTraccion)
-                                  VALUES(@marca, @modelo, @color, @numeroPuertas, @dobleTraccion)";
-                SqlCommand comandoParaConsulta = new SqlCommand(consulta, conexion);
-                try
-                {
-                    SqlDataAdapter adaptadorParaTabla = new SqlDataAdapter(comandoParaConsulta);
-                    comandoParaConsulta.Parameters.AddWithValue("@marca", automovil.Marca);
-                    comandoParaConsulta.Parameters.AddWithValue("@modelo", automovil.Modelo);
-                    comandoParaConsulta.Parameters.AddWithValue("@color", automovil.Color);
-                    comandoParaConsulta.Parameters.AddWithValue("@numeroPuertas",automovil.NumeroPuertas);
-                    comandoParaConsulta.Parameters.AddWithValue("@dobleTraccion", automovil.DobleTraccion);
-                    conexion.Open();
-                    exito = comandoParaConsulta.ExecuteNonQuery() >= 1;
-                    conexion.Close();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error al ejecutar la consulta: " + ex.Message);
-                }
+            string consulta = @"INSERT INTO concesionario(marca, modelo, color,
+                              numeroPuertas, dobleTraccion)
+                              VALUES(@marca, @modelo, @color, @numeroPuertas, @dobleTraccion)";
+            SqlCommand comandoParaConsulta = new SqlCommand(consulta, conexion);
+            try
+            {
+                // Establecer los parámetros de la consulta
+                SqlDataAdapter adaptadorParaTabla = new SqlDataAdapter(comandoParaConsulta);
+                comandoParaConsulta.Parameters.AddWithValue("@marca", automovil.Marca);
+                comandoParaConsulta.Parameters.AddWithValue("@modelo", automovil.Modelo);
+                comandoParaConsulta.Parameters.AddWithValue("@color", automovil.Color);
+                comandoParaConsulta.Parameters.AddWithValue("@numeroPuertas",automovil.NumeroPuertas);
+                comandoParaConsulta.Parameters.AddWithValue("@dobleTraccion", automovil.DobleTraccion);
+
+                // Abrir la conexión y ejecutar la consulta
+                conexion.Open();
+                // Verificar si se agregó al menos una fila
+                consultaExitosa = comandoParaConsulta.ExecuteNonQuery() >= 1;
+                conexion.Close();
+            }
+            catch (Exception ex)
+            {
+                // Lanzar una excepción para manejar el error en un nivel superior
+                throw new Exception("Error al ejecutar la consulta: " + ex.Message);
+            }
             
-            return exito;
+            return consultaExitosa;
         }
+
+        // Método para obtener todos los automóviles del concesionario
         public List<AutomovilModel> ObtenerAutomoviles()
         {
             List<AutomovilModel> automoviles = new List<AutomovilModel>();
@@ -52,16 +60,13 @@ namespace Examen2.Handlers
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error al crear la tabla de consulta: " + ex.Message);
-                return automoviles; 
+                // Lanzar una excepción para manejar el error en un nivel superior
+                throw new Exception("Error al crear la tabla de consulta: " + ex.Message);
             }
-
-
             return automoviles;
-
-
         }
 
+        // Método para obtener los automóviles por marca
         public List<AutomovilModel> ObtenerAutomovilesPorMarca(string marca)
         {
             List<AutomovilModel> automoviles = new List<AutomovilModel>();
@@ -72,8 +77,12 @@ namespace Examen2.Handlers
             {
                  using (SqlCommand comandoConsulta = new SqlCommand(consulta, conexion))
                  {
+                      // Abrir la conexión y ejecutar la consulta
                      comandoConsulta.Parameters.AddWithValue("@marca", marca);
+                    
+                     // Cerrar la conexión
                      conexion.Open();
+
                      DataTable tablaResultado = new DataTable();
                      tablaResultado.Load(comandoConsulta.ExecuteReader());
                      automoviles = DevolverAutomovilesConsulta(tablaResultado);
@@ -81,13 +90,14 @@ namespace Examen2.Handlers
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error al ejecutar la consulta: " + ex.Message);
+                // Lanzar una excepción para manejar el error en un nivel superior
+                throw new Exception("Error al ejecutar la consulta: " + ex.Message);
             }
 
             return automoviles;
         }
 
-
+        // Método privado para convertir los resultados de la consulta en una lista de automóviles
         private List<AutomovilModel> DevolverAutomovilesConsulta(DataTable tablaResultado)
         {
             List<AutomovilModel> automoviles = new List<AutomovilModel>();
@@ -107,14 +117,15 @@ namespace Examen2.Handlers
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error al agregar un automóvil: " + ex.Message);
+                    // Lanzar una excepción para manejar el error en un nivel superior
+                    throw new Exception("Error al agregar un automóvil: " + ex.Message);
                 }
             }
 
             return automoviles;
         }
 
-
+        // Método para eliminar un automóvil del concesionario
         public void EliminarAutomovil(AutomovilModel? automovil)
         {
             if (AutomovilNoNulo(automovil))
@@ -130,7 +141,8 @@ namespace Examen2.Handlers
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error al ejecutar la consulta: " + ex.Message);
+                    // Lanzar una excepción para manejar el error en un nivel superior
+                    throw new Exception("Error al ejecutar la consulta: " + ex.Message);
                 }
             }
 
@@ -141,6 +153,7 @@ namespace Examen2.Handlers
             return automovil != null;
         }
 
+        // Método para editar un automóvil del concesionario
         public void  EditarAutomovil(AutomovilModel automovil)
         {
             if (AutomovilNoNulo(automovil))
@@ -166,7 +179,8 @@ namespace Examen2.Handlers
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error al ejecutar la consulta: " + ex.Message);
+                    // Lanzar una excepción para manejar el error en un nivel superior
+                    throw new Exception("Error al ejecutar la consulta: " + ex.Message);
                 }
             }
 
