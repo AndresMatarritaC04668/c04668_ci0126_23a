@@ -185,9 +185,5 @@ namespace Examen2.Handlers
             }
 
         }
-
-
-
-
     }
 }
