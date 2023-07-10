@@ -1,9 +1,8 @@
 ﻿using Examen2.Controllers;
-using Examen2.Handlers;
 using Examen2.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Examen2_Unit_Test.Controllers
 {
@@ -11,11 +10,14 @@ namespace Examen2_Unit_Test.Controllers
     public class EditarAutomovilController_Test
     {
         private AutomovilController automovilController;
+        private ITempDataDictionary tempData;
 
         [TestInitialize]
         public void Setup()
         {
             automovilController = new AutomovilController();
+            tempData = new TempDataDictionary(new DefaultHttpContext(), new MockSessionStateTempDataProvider());
+            automovilController.TempData = tempData;
         }
 
         [TestMethod]
@@ -26,6 +28,9 @@ namespace Examen2_Unit_Test.Controllers
         public void EditarAutomovil_ValidAutomovil_RedirectsToAdministrarAutomoviles()
         {
             // Arrange
+            automovilController.TempData["modelo"] = "Corolla";
+            automovilController.TempData["marca"] = "Toyota";
+
             AutomovilModel automovil = new AutomovilModel
             {
                 Marca = "Toyota",
@@ -69,5 +74,20 @@ namespace Examen2_Unit_Test.Controllers
             Assert.IsTrue(exception.Message.Contains("La modificación del automóvil tuvo un error"));
         }
 
+        // Implementación simulada de ITempDataProvider para usar en pruebas
+        public class MockSessionStateTempDataProvider : ITempDataProvider
+        {
+            public IDictionary<string, object> LoadTempData(HttpContext context)
+            {
+                return new Dictionary<string, object>();
+            }
+
+            public void SaveTempData(HttpContext context, IDictionary<string, object> values)
+            {
+                // No se necesita guardar los valores en las pruebas unitarias
+            }
+
+        }
+
     }
-}
+} 

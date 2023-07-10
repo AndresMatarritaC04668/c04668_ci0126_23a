@@ -154,9 +154,9 @@ namespace Examen2.Handlers
         }
 
         // Método para editar un automóvil del concesionario
-        public void  EditarAutomovil(AutomovilModel automovil)
+        public void  EditarAutomovil(AutomovilModel automovilNuevo , AutomovilModel automovilAEditar)
         {
-            if (AutomovilNoNulo(automovil))
+            if (AutomovilNoNulo(automovilNuevo) && AutomovilNoNulo(automovilAEditar))
             {
                 var consulta = @"UPDATE [dbo].[concesionario] SET
                            modelo = @modelo,
@@ -164,15 +164,17 @@ namespace Examen2.Handlers
                            color = @color,
                            numeroPuertas = @numeroPuertas,
                            dobleTraccion = @dobleTraccion                           
-                           WHERE modelo = @modelo AND marca = @marca ";
+                           WHERE modelo = @modeloViejo AND marca = @marcaVieja ";
                 SqlCommand comandoParaConsulta = new SqlCommand(consulta, conexion);
                 try
                 {
-                    comandoParaConsulta.Parameters.AddWithValue("@modelo", automovil.Modelo);
-                    comandoParaConsulta.Parameters.AddWithValue("@marca", automovil.Marca);
-                    comandoParaConsulta.Parameters.AddWithValue("@color", automovil.Color);
-                    comandoParaConsulta.Parameters.AddWithValue("@numeroPuertas", automovil.NumeroPuertas);
-                    comandoParaConsulta.Parameters.AddWithValue("@dobleTraccion", automovil.DobleTraccion);
+                    comandoParaConsulta.Parameters.AddWithValue("@modelo", automovilNuevo.Modelo);
+                    comandoParaConsulta.Parameters.AddWithValue("@marca", automovilNuevo.Marca);
+                    comandoParaConsulta.Parameters.AddWithValue("@color", automovilNuevo.Color);
+                    comandoParaConsulta.Parameters.AddWithValue("@numeroPuertas", automovilNuevo.NumeroPuertas);
+                    comandoParaConsulta.Parameters.AddWithValue("@dobleTraccion", automovilNuevo.DobleTraccion);
+                    comandoParaConsulta.Parameters.AddWithValue("@modeloViejo", automovilAEditar.Modelo);
+                    comandoParaConsulta.Parameters.AddWithValue("@marcaVieja", automovilAEditar.Marca);
                     conexion.Open();
                     comandoParaConsulta.ExecuteNonQuery();
                     conexion.Close();

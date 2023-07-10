@@ -7,7 +7,6 @@ namespace Examen2.Controllers
     public class AutomovilController : Controller
     {
        private AutomovilHandler automovilHandler = new AutomovilHandler();
-
         [HttpGet]
 
         public IActionResult AdministrarAutomoviles()
@@ -67,6 +66,8 @@ namespace Examen2.Controllers
                 }
                 else
                 {
+                    TempData["marca"] = marca;
+                    TempData["modelo"] =  modelo;
                     vista = View(automovil);
                 }
             }
@@ -82,14 +83,24 @@ namespace Examen2.Controllers
         [HttpPost]
         public ActionResult EditarAutomovil(AutomovilModel automovil)
         {
-            try
+            if (ModelState.IsValid)
             {
-                automovilHandler.EditarAutomovil(automovil);
-                return RedirectToAction("AdministrarAutomoviles", "Automovil");
+                try
+                {
+                    AutomovilModel automovilAEditar = new AutomovilModel();
+                    automovilAEditar.Marca = (string)TempData["marca"];
+                    automovilAEditar.Modelo = (string)TempData["modelo"];
+                    automovilHandler.EditarAutomovil(automovil, automovilAEditar);
+                    return RedirectToAction("AdministrarAutomoviles", "Automovil");
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("La modificación del automóvil tuvo un error: " + ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                throw new Exception("La modificación del automóvil tuvo un error: " + ex.Message);
+                return View(automovil);
             }
         }
 
