@@ -49,6 +49,14 @@
               "target": "Package",
               "version": "[5.1.1, )"
             },
+            "Selenium.Support": {
+              "target": "Package",
+              "version": "[4.10.0, )"
+            },
+            "Selenium.WebDriver": {
+              "target": "Package",
+              "version": "[4.10.0, )"
+            },
             "System.Data.SqlClient": {
               "target": "Package",
               "version": "[4.8.5, )"

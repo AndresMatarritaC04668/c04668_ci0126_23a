@@ -70,3 +70,9 @@ C:\Users\andre\Documents\UCR\laboratorios_inge_23a\Examen2_CI0126\Examen2\obj\De
 C:\Users\andre\Documents\UCR\laboratorios_inge_23a\Examen2_CI0126\Examen2\obj\Debug\net6.0\Examen2.pdb
 C:\Users\andre\Documents\UCR\laboratorios_inge_23a\Examen2_CI0126\Examen2\obj\Debug\net6.0\Examen2.genruntimeconfig.cache
 C:\Users\andre\Documents\UCR\laboratorios_inge_23a\Examen2_CI0126\Examen2\obj\Debug\net6.0\ref\Examen2.dll
+C:\Users\andre\Documents\UCR\laboratorios_inge_23a\Examen2_CI0126\Examen2\bin\Debug\net6.0\selenium-manager\linux\selenium-manager
+C:\Users\andre\Documents\UCR\laboratorios_inge_23a\Examen2_CI0126\Examen2\bin\Debug\net6.0\selenium-manager\macos\selenium-manager
+C:\Users\andre\Documents\UCR\laboratorios_inge_23a\Examen2_CI0126\Examen2\bin\Debug\net6.0\selenium-manager\windows\selenium-manager.exe
+C:\Users\andre\Documents\UCR\laboratorios_inge_23a\Examen2_CI0126\Examen2\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\andre\Documents\UCR\laboratorios_inge_23a\Examen2_CI0126\Examen2\bin\Debug\net6.0\WebDriver.Support.dll
+C:\Users\andre\Documents\UCR\laboratorios_inge_23a\Examen2_CI0126\Examen2\bin\Debug\net6.0\WebDriver.dll

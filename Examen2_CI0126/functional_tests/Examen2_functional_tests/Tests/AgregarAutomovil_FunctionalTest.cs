@@ -1,24 +1,25 @@
 ﻿using Examen2_functional_tests.PageObjectModels;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
-
-
 namespace Examen2_functional_tests.Tests
-{   [TestFixture]
-    public class Operaciones_CRUD_Test
+{
+    [TestFixture]
+    public class AgregarAutomovil_FunctionalTest
     {
         private IWebDriver driver = null;
         private AgregarAutomovilPage agregarAutomovilPage = null;
         private AdministrarAutomovilesPage administrarAutomovilesPage = null;
 
-        public Operaciones_CRUD_Test() {
+        public AgregarAutomovil_FunctionalTest()
+        {
             driver = new ChromeDriver();
         }
+
         [SetUp]
         public void SetUp()
         {
-         
             driver.Navigate().GoToUrl("https://localhost:7281/");
             driver.Manage().Window.Maximize();
 
@@ -26,24 +27,20 @@ namespace Examen2_functional_tests.Tests
             administrarAutomovilesPage = new AdministrarAutomovilesPage(driver);
         }
 
-
         [TearDown]
         public void TearDown()
         {
             driver.Quit();
         }
 
-
+        [Test]
         /*
          * Objetivo de la prueba: Verificar que se pueda agregar un automóvil correctamente.
          * El resultado esperado cumple el objetivo de la prueba, ya que se espera que se agregue correctamente el automóvil "Honda Civic".
+         * Muy importante mencionar que el carro mas recientemente agregado es siempre el primero en la lista por eso se verifica el primero
          */
-        [Test, Order(1)]
         public void agregarAutomovilFunctionalTest()
         {
-            //Arrange
-            SetUp();
-
             //Act 
             string mensajeAccion = agregarAutomovilPage.AgregarAutomovil("Honda", "Civic", "Azul", "2");
             string automovilAgregado = administrarAutomovilesPage.VerificarAutomovilAgregado();
@@ -51,10 +48,6 @@ namespace Examen2_functional_tests.Tests
             //Assert
             Assert.That(mensajeAccion, Is.EqualTo("El automóvil Honda Civic fue agregado con éxito."));
             Assert.That(automovilAgregado, Is.EqualTo("Honda Civic"));
-
-            TearDown();
         }
-
     }
 }
-
