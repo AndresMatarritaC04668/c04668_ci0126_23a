@@ -32,7 +32,7 @@ namespace Examen2_functional_tests.PageObjectModels
             driver.FindElement(editarLink).Click();
             // Manejar la alerta
             IAlert alert = driver.SwitchTo().Alert();
-            alert.Accept();  // o alert.Dismiss() si quieres cancelarla
+            alert.Accept();  // o alert.Dismiss() para  cancelar la alerta
         }
 
 

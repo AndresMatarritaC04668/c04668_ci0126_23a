@@ -35,8 +35,9 @@ namespace Examen2_functional_tests.Tests
 
         [Test]
         /*
-         * Objetivo de la prueba: Verificar que se pueda agregar un automóvil correctamente.
+         * Objetivo de la prueba: Verificar que se pueda agregar un automóvil correctamente y observar los datos del nuevo automovil.
          * El resultado esperado cumple el objetivo de la prueba, ya que se espera que se agregue correctamente el automóvil "Honda Civic".
+         * y al encontrarlo en la vista demuestra su funcionamiento correcto
          * Muy importante mencionar que el carro mas recientemente agregado es siempre el primero en la lista por eso se verifica el primero
          */
         public void agregarAutomovilFunctionalTest()
@@ -47,7 +48,9 @@ namespace Examen2_functional_tests.Tests
 
             //Assert
             Assert.That(mensajeAccion, Is.EqualTo("El automóvil Honda Civic fue agregado con éxito."));
-            Assert.That(automovilAgregado, Is.EqualTo("Honda Civic"));
+            Assert.That(automovilAgregado, Is.EqualTo("Honda Civic Azul 2"));
+
+            TearDown();
         }
     }
 }
