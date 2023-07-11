@@ -16,8 +16,8 @@ namespace Examen2_functional_tests.PageObjectModels
         private readonly By colorUltimoAutomovil = By.CssSelector("tr:last-child > td:nth-child(3)");
         private readonly By puertasUltimoAutomovil = By.CssSelector("tr:last-child > td:nth-child(4)");
         private readonly By botonEliminarLink = By.LinkText("Eliminar");
-
-
+        private readonly By cajaTextoBusquedaMarca = By.Id("marca-input");
+        private readonly By botonBusquedaPorMarca = By.CssSelector(".btn-enviar");
 
         public AdministrarAutomovilesPage(IWebDriver driver)
         {
@@ -100,6 +100,16 @@ namespace Examen2_functional_tests.PageObjectModels
                 IAlert alert = driver.SwitchTo().Alert();
                 alert.Accept();  // o alert.Dismiss() para  cancelar la alerta
             }
+        }
+
+        public void BuscarAutomovilesPorMarca(string marca)
+        {
+            IWebElement cajaTextoBusquedaMarcaElment = driver.FindElement(cajaTextoBusquedaMarca);
+            IWebElement botonBusquedaPorMarcaElement = driver.FindElement(botonBusquedaPorMarca);
+
+            cajaTextoBusquedaMarcaElment.SendKeys(marca);
+            botonBusquedaPorMarcaElement.Click();
+
         }
     }
 }

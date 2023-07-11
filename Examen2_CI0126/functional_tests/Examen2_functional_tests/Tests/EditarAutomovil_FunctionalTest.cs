@@ -5,13 +5,13 @@ using OpenQA.Selenium.Chrome;
 namespace Examen2_functional_tests.Tests
 {
     [TestFixture]
-    public class EditarAutomovilFunctionalTestTest
+    public class EditarAutomovil_FunctionalTest
     {
         private IWebDriver driver = null;
         private AdministrarAutomovilesPage administrarAutomovilesPage = null;
         private EditarAutomovilPage editarAutomovilPage = null;
 
-        public EditarAutomovilFunctionalTestTest()
+        public EditarAutomovil_FunctionalTest()
         {
             driver = new ChromeDriver();
         }

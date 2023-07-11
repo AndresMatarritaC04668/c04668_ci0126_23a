@@ -42,6 +42,9 @@ namespace Examen2_functional_tests.Tests
          */
         public void agregarAutomovilFunctionalTest()
         {
+            //Arrange
+            agregarAutomovilPage.IrAgregarAutomovilPage();
+
             //Act 
             string mensajeAccion = agregarAutomovilPage.AgregarAutomovil("Honda", "Civic", "Azul", "2");
             string automovilAgregado = administrarAutomovilesPage.VerificarAutomovilAgregado();

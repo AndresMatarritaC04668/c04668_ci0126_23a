@@ -18,9 +18,12 @@ public class AgregarAutomovilPage
         this.driver = driver;
     }
 
-    public string AgregarAutomovil(string marca, string modelo, string color, string numeroPuertas)
+    public void IrAgregarAutomovilPage()
     {
         driver.FindElement(linkAgregarAutomovil).Click();
+    }
+    public string AgregarAutomovil(string marca, string modelo, string color, string numeroPuertas)
+    {
         driver.FindElement(campoMarca).Click();
         driver.FindElement(campoMarca).SendKeys(marca);
         driver.FindElement(campoModelo).Click();
