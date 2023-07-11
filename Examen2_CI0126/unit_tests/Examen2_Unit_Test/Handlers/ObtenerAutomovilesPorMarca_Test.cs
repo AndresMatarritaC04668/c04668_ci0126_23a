@@ -46,7 +46,7 @@ namespace Examen2_Unit_Test.Handlers
         public void ObtenerAutomovilesPorMarca_NonExistingMarca_ReturnsEmptyList()
         {
             // Arrange
-            string marca = "Ford";
+            string marca = "Lamborghini";
 
             // Act
             List<AutomovilModel> automoviles = automovilHandler.ObtenerAutomovilesPorMarca(marca);
